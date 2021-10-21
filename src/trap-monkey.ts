@@ -6,7 +6,7 @@ interface FnRecord {
 
 type Counter = Map<Function, FnRecord>;
 
-export const trapMonkey = (options: { log?: 'debug' | 'once', reportDelay?: number }) => (constructor: any): any => {
+export const trapMonkey = (options: { mode?: 'debug' | 'once', reportDelay?: number }) => (constructor: any): any => {
   if (!isClass(constructor)) {
     throw new Error('`performance` decorator can only be used on ES6 class');
   }
@@ -20,7 +20,7 @@ export const trapMonkey = (options: { log?: 'debug' | 'once', reportDelay?: numb
       const hijacked = this as any;
       const counter = this.#callCounter;
 
-      if (!options.log || options.log === 'once') {
+      if (!options.mode || options.mode === 'once') {
         report(counter, options.reportDelay);
       }
 
@@ -39,7 +39,7 @@ export const trapMonkey = (options: { log?: 'debug' | 'once', reportDelay?: numb
                   // @ts-ignore
                   const ret = fn.call(this, ...args);
                   const tmp = increase(counter, fn, start);
-                  if (options.log === 'debug') {
+                  if (options.mode === 'debug') {
                     console.log(`calling ${fnName} for ${tmp.count} times, cost ${tmp.cost}ms`);
                   }
                   return ret;
