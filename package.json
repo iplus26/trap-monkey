@@ -1,0 +1,13 @@
+{
+  "name": "trap-monkey",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ivanxfjiang(姜希凡) <ivanxfjiang@tencent.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-typescript": "^1.1.0",
+    "rollup": "^2.58.0",
+    "typescript": "^4.4.4"
+  }
+}
